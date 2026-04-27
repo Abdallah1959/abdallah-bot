@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 from flask import Flask
 from threading import Thread
-import asyncio
 
 # 1. إعداد خادم ويب بسيط لإبقاء البوت مستيقظاً على الاستضافة
 app = Flask(__name__)
@@ -23,7 +22,7 @@ intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-# الـ ID الخاص بالقناة الصوتية اللي بعته
+# الـ ID الخاص بالقناة الصوتية
 VOICE_CHANNEL_ID = 1429957936762978368
 
 @bot.event
@@ -34,7 +33,7 @@ async def on_ready():
     channel = bot.get_channel(VOICE_CHANNEL_ID)
     if channel and isinstance(channel, discord.VoiceChannel):
         try:
-            # التحقق إذا كان البوت متصلاً بالفعل لتجنب الأخطاء
+            # التحقق إذا كان البوت متصلاً بالفعل
             vc = discord.utils.get(bot.voice_clients, guild=channel.guild)
             if not vc:
                 await channel.connect()
@@ -49,6 +48,6 @@ async def on_ready():
 # 3. تشغيل خادم الويب ثم تشغيل البوت
 keep_alive()
 
-# التوكن الخاص بك
+# التوكن الخاص بالبوت (تم وضع التوكن القديم بناءً على طلبك)
 TOKEN = 'MTQ5ODIzNDU4NzAxOTQ4MTEzOQ.GOet5S.XDWaXjwd2kbLX20U22TuYccI4E9FZAoy1aX81c'
 bot.run(TOKEN)
